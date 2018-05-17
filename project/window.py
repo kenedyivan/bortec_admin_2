@@ -378,7 +378,7 @@ class Ui_MainWindow(object):
         cursor = conn.cursor()
         cursor.execute('select id, quantity from sales')
         data_list = cursor.fetchall()
-        print(data_list)
+        whoprint(data_list)
         db_xs = []
         db_ys = []
         for row_number, d in enumerate(data_list):
