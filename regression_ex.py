@@ -13,8 +13,6 @@ style.use('ggplot')
 
 df = quandl.get("EOD/V", authtoken="_rRyue-2YPfFoxW1zaVr")
 
-print(df)
-
 df = df[['Adj_Open', 'Adj_High', 'Adj_Low', 'Adj_Close', 'Adj_Volume']]
 df['HL_PCT'] = (df['Adj_High'] - df['Adj_Low']) / df['Adj_Low'] * 100.0
 df['PCT_change'] = (df['Adj_Close'] - df['Adj_Open']) / df['Adj_Open'] * 100.0
@@ -34,12 +32,15 @@ x = preprocessing.scale(x)
 x_lately = x[-forecast_out:]
 x = x[:-forecast_out]
 
+
 df.dropna(inplace=True)
 y = np.asarray(df['label'])
 
 df.dropna(inplace=True)
 
 X_train, X_test, y_train, y_test = model_selection.train_test_split(x, y, test_size=0.2)
+
+print(y_train.shape)
 
 clf = LinearRegression(n_jobs=-1)
 clf.fit(X_train, y_train)
