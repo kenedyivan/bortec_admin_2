@@ -72,12 +72,12 @@ if length != 0:
 else:
     print('no items got')
 
-x_lately = np.asarray([1, 298, 298, 298, 1014, 69, 4, 3807]).reshape(1, -1)
+# x_lately = np.asarray([1, 298, 298, 298, 1014, 69, 4, 3807]).reshape(1, -1)
 
 
-def ml_prediction(item_id):
+def ml_prediction(item_id, data):
+    x_lately = np.asarray(data).reshape(1, -1)
     try:
-
         datax = np.loadtxt('ml_test_data/' + str(item_id) + '_x_test.pickle')
         datay = np.loadtxt('ml_test_data/' + str(item_id) + '_y_test.pickle')
 
@@ -91,7 +91,7 @@ def ml_prediction(item_id):
             accuracy = clf.score(X_test, y_test)
             forecast_set = clf.predict(x_lately)
 
-            print('item_id', item_id, ':    accuracy: ', accuracy, ' forecast: ', forecast_set[0])
+            return {'item_id': item_id, 'accuracy': accuracy, 'forecast': forecast_set[0]}
 
         except FileNotFoundError:
             print('No trained model for item ', item_id)
@@ -100,5 +100,10 @@ def ml_prediction(item_id):
         print('No test data for item ', item_id)
 
 
-for row_number, d in enumerate(data_list):
-    ml_prediction(d[0])
+def get_prediction(data):
+    x_lately = data
+    forecasts = []
+    for row, d in enumerate(data_list):
+        data = ml_prediction(d[0], x_lately)
+        forecasts.append(data)
+    return forecasts

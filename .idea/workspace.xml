@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98c0f6fb-311f-4a97-a4d0-a7f0b6bc57dc" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/ml.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/ml.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/ml_models/12.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/project/ml_models/12.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/ml_models/9.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/project/ml_models/9.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/ml_test_data/12_y_test.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/project/ml_test_data/12_y_test.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/ml_test_data/9_x_test.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/project/ml_test_data/9_x_test.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/ml_test_data/9_y_test.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/project/ml_test_data/9_y_test.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/window.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/window.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,7 +20,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/bortec_system_admin_desk_master$regression_ex.coverage" NAME="regression_ex Coverage Results" MODIFIED="1526898981296" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/bortec_system_admin_desk_master$window.coverage" NAME="window Coverage Results" MODIFIED="1526293214160" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/project" />
+    <SUITE FILE_PATH="coverage/bortec_system_admin_desk_master$window.coverage" NAME="window Coverage Results" MODIFIED="1527062060510" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/project" />
     <SUITE FILE_PATH="coverage/bortec_system_admin_desk_master$ml.coverage" NAME="ml Coverage Results" MODIFIED="1526990177650" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/project" />
   </component>
   <component name="DatabaseView">
@@ -53,52 +58,38 @@
     </expand>
     <select />
   </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file leaf-file-name="regression_ex.py" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/regression_ex.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="105">
-                    <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
-                    <folding>
-                      <element signature="e#0#11#0" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ml.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/project/ml.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="74" column="60" selection-start-line="74" selection-start-column="60" selection-end-line="74" selection-end-column="60" />
-              <folding>
-                <element signature="e#0#22#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="window.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/window.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="1690" column="4" selection-start-line="1690" selection-start-column="4" selection-end-line="1690" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="window.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/project/window.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="84">
+                  <caret line="1139" column="24" lean-forward="true" selection-start-line="1139" selection-start-column="24" selection-end-line="1139" selection-end-column="24" />
+                  <folding>
+                    <element signature="e#191#209#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="ml.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/project/ml.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="177">
+                  <caret line="109" lean-forward="true" selection-start-line="109" selection-end-line="109" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -109,10 +100,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>label</find>
-      <find>sales</find>
-      <find>Dialo</find>
-      <find>&quot;Dialog</find>
       <find>setEc</find>
       <find>password</find>
       <find>ys.a</find>
@@ -131,7 +118,7 @@
       <find>items_table</find>
       <find>btn_open_add_operator_dialog</find>
       <find>save_operator_edi</find>
-      <find>bortec_inv_   system_db</find>
+      <find />
       <find>first_name</find>
       <find>Operators</find>
       <find>background</find>
@@ -139,6 +126,10 @@
       <find>BORTEC</find>
       <find>user='root'</find>
       <find>animation</find>
+      <find>setUp</find>
+      <find>btn_predic</find>
+      <find>asty</find>
+      <find>btn_predictive_analysis(</find>
     </findStrings>
     <replaceStrings>
       <replace>user=self.dbuser</replace>
@@ -180,9 +171,9 @@
         <option value="$PROJECT_DIR$/project/flie.py" />
         <option value="$PROJECT_DIR$/project/uis/items.py" />
         <option value="$PROJECT_DIR$/project/admin_login.py" />
-        <option value="$PROJECT_DIR$/project/window.py" />
         <option value="$PROJECT_DIR$/regression_ex.py" />
         <option value="$PROJECT_DIR$/project/ml.py" />
+        <option value="$PROJECT_DIR$/project/window.py" />
       </list>
     </option>
   </component>
@@ -196,35 +187,16 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="67" />
-    <option name="y" value="113" />
-    <option name="width" value="1221" />
-    <option name="height" value="755" />
+    <option name="y" value="27" />
+    <option name="width" value="800" />
+    <option name="height" value="873" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="bortec_system_admin_desk-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bortec_system_admin_desk-master" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bortec_system_admin_desk-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bortec_system_admin_desk-master" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -254,7 +226,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.ml">
+  <component name="RunManager" selected="Python.window">
     <configuration name="flie" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="untitled" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -359,9 +331,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.window" />
         <item itemvalue="Python.ml" />
         <item itemvalue="Python.regression_ex" />
-        <item itemvalue="Python.window" />
         <item itemvalue="Python.items" />
         <item itemvalue="Python.flie" />
       </list>
@@ -391,20 +363,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1600" height="873" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3295238" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50127226" side_tool="true" weight="0.42326334" />
-      <window_info anchor="right" x="0" y="0" width="255" height="555" id="Documentation" order="5" sideWeight="0.50339216" side_tool="true" weight="0.32909244" />
+      <window_info anchor="right" x="0" y="0" width="150" height="673" id="Documentation" order="5" sideWeight="0.50339216" side_tool="true" weight="0.32849604" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49872774" visible="true" weight="0.4789688" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49872774" visible="true" weight="0.55359566" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32971507" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32971507" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.57027465" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14056483" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.18724559" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.29155672" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" sideWeight="0.49932158" weight="0.32991013" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3279483" />
       <window_info anchor="right" id="SciView" order="4" sideWeight="0.49660787" weight="0.6047498" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39891452" />
@@ -415,6 +385,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3279483" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -429,6 +400,40 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/project/window.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16965">
+          <caret line="1131" column="30" lean-forward="true" selection-start-line="1131" selection-start-column="30" selection-end-line="1131" selection-end-column="30" />
+          <folding>
+            <element signature="e#191#209#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/ml.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1365">
+          <caret line="91" selection-start-line="91" selection-end-line="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/ml.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1110">
+          <caret line="74" column="60" selection-start-line="74" selection-start-column="60" selection-end-line="74" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/window.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25215">
+          <caret line="1690" column="4" selection-start-line="1690" selection-start-column="4" selection-end-line="1690" selection-end-column="23" />
+          <folding>
+            <element signature="e#191#209#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/local_data_sets/lego-database/inventory_parts.csv" />
     <entry file="file://$USER_HOME$/anaconda3/envs/venv3/lib/python3.6/site-packages/mysql/__init__.py" />
     <entry file="file://$PROJECT_DIR$/data">
@@ -644,16 +649,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/ml_models/1.pickle">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/window.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="1690" column="4" selection-start-line="1690" selection-start-column="4" selection-end-line="1690" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/sklearn/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
@@ -668,43 +663,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/ml_test_data/2_x_test.pickle">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/sklearn/linear_model/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="255" selection-start-line="255" selection-end-line="255" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/regression_ex.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+        <state relative-caret-position="165">
+          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/ml_test_data/1_y_test.pickle">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/ml_test_data/1_x_test.pickle">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/ml_test_data/12_y_test.pickle">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/ml_test_data/12_x_test.pickle">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/ml_test_data/9_y_test.pickle">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/ml_test_data/9_x_test.pickle">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/project/ml.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="74" column="60" selection-start-line="74" selection-start-column="60" selection-end-line="74" selection-end-column="60" />
+        <state relative-caret-position="177">
+          <caret line="109" lean-forward="true" selection-start-line="109" selection-end-line="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/window.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="1139" column="24" lean-forward="true" selection-start-line="1139" selection-start-column="24" selection-end-line="1139" selection-end-column="24" />
           <folding>
-            <element signature="e#0#22#0" expanded="true" />
+            <element signature="e#191#209#0" expanded="true" />
           </folding>
         </state>
       </provider>

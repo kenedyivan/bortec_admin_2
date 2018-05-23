@@ -5,6 +5,8 @@
 # Created by: PyQt5 UI code generator 5.6
 #
 # WARNING! All changes made in this file will be lost!
+import http.client
+import json
 
 from PyQt5 import QtCore, QtWidgets
 import mysql.connector
@@ -14,6 +16,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib import style
 import numpy as np
+from project.ml import *
 
 from project.admin_login import GUIForm
 
@@ -712,8 +715,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setObjectName("verticalLayout_3")
 
         # Loads first page, items page
-        # self.btn_items_click()
-        self.btn_analytics_click()
+
+        # self.btn_analytics_click()
 
         self.horizontalLayout_2.addLayout(self.verticalLayout_3)
         self.horizontalLayout.addWidget(self.frame_2)
@@ -751,6 +754,7 @@ class Ui_MainWindow(object):
         self.pushButton_4.clicked.connect(self.btn_inventory_click)
         self.pushButton_5.clicked.connect(self.btn_analytics_click)
         self.pushButton_6.clicked.connect(self.btn_static_analytics_click)
+        self.pushButton_7.clicked.connect(self.btn_predictive_analysis)
         self.pushButton_8.clicked.connect(self.btn_operator_performance_click)
         self.pushButton_operators.clicked.connect(self.btn_operators_click)
         self.pushButton_10.clicked.connect(self.btn_logout_click)
@@ -1100,6 +1104,40 @@ class Ui_MainWindow(object):
         for i in reversed(range(self.verticalLayout_3.count())):
             self.verticalLayout_3.itemAt(i).widget().setParent(None)
         self.static_analytics_view()
+
+    def btn_predictive_analysis(self):
+        print('predictive analysis')
+        connection = http.client.HTTPConnection('localhost:8000')
+        connection.request('GET', '/api/external-apis')
+        response = connection.getresponse()
+        data = response.read().decode()
+        json_data = json.loads(data)
+        print(json_data['weather'])
+
+        weather = json_data['weather']
+        if weather == 'Clouds':
+            w = 1
+        else:
+            w = 2
+        temp = json_data['temp']
+        pressure = float(json_data['pressure'])
+        humidity = float(json_data['humidity'])
+        temp_min = json_data['temp_min']
+        temp_max = json_data['temp_max']
+        wind_speed = float(json_data['wind_speed'])
+        fuel = float(json_data['fuel'])
+        w = float(w)
+
+        d_apis = [w, temp, temp_min, temp_max, pressure, humidity, wind_speed, fuel]
+        # d_apis = [1, 298, 298, 298, 1014, 69, 4, 3807]
+
+        # [2.0000e+00 2.9215e+02 2.9215e+02 2.9215e+02 1.0210e+03 9.3000e+01
+        #  2.6000e+00 3.8075e+03]
+
+        # d_apis = [2.0, 292.15, 292.15, 292.15, 1021, 93, 2.6, 3807.50]
+
+        forecasts = get_prediction(d_apis)
+        print(forecasts)
 
     def btn_operators_click(self):
         for i in reversed(range(self.verticalLayout_3.count())):
