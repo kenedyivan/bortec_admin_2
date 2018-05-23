@@ -620,7 +620,9 @@ class Ui_MainWindow(object):
         money = total_sales
 
         self.fig4, ax4 = plt.subplots()
+        plt.clf()
         plt.bar(x, money)
+        plt.legend('Sales', loc='upper left')
         plt.xticks(x, tuple(operators))
         plt.xlabel('Operators')
         plt.ylabel('Total sales')
