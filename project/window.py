@@ -16,9 +16,12 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib import style
 import numpy as np
-from project.ml import *
+import datetime
+# from project.ml import * todo Uncomment to use pycharm debugger
+# from project.admin_login import GUIForm
 
-from project.admin_login import GUIForm
+from ml import *
+from admin_login import GUIForm
 
 style.use('fivethirtyeight')
 
@@ -381,23 +384,14 @@ class Ui_MainWindow(object):
         cursor = conn.cursor()
         cursor.execute('select id, quantity from sales')
         data_list = cursor.fetchall()
-        whoprint(data_list)
         db_xs = []
         db_ys = []
         for row_number, d in enumerate(data_list):
-            db_xs.append(str(d[0]))
+            db_xs.append(d[0])
             db_ys.append(int(d[1]))
 
         conn.close()
-        # graph_data = open('real_time_data.data', 'r').read()  # todo Retrieve from database
-        # lines = graph_data.split('\n')
-        # xs = []
-        # ys = []
-        # for line in lines:
-        #     if len(line) > 1:
-        #         x, y = line.split(',')
-        #         xs.append(int(x))
-        #         ys.append(int(y))
+
         xs = db_xs
         ys = db_ys
         self.ax1.clear()
@@ -716,7 +710,7 @@ class Ui_MainWindow(object):
 
         # Loads first page, items page
 
-        # self.btn_analytics_click()
+        self.btn_analytics_click()
 
         self.horizontalLayout_2.addLayout(self.verticalLayout_3)
         self.horizontalLayout.addWidget(self.frame_2)
@@ -1059,7 +1053,6 @@ class Ui_MainWindow(object):
         conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
         cursor = conn.cursor()
         query = 'delete from items where product_name=\'' + item_name + '\''
-        print(query)
         try:
             cursor.execute(query)
             conn.commit()
@@ -1107,10 +1100,11 @@ class Ui_MainWindow(object):
         self.static_analytics_view()
 
     def view_predictive_analysis(self):
+        now = datetime.datetime.now()
 
         for i in reversed(range(self.verticalLayout_3.count())):
             self.verticalLayout_3.itemAt(i).widget().setParent(None)
-
+        MainWindow.setWindowTitle("Predictive analytics")
         self.frame_6 = QtWidgets.QFrame(self.frame_2)
         self.frame_6.setMaximumSize(QtCore.QSize(16777215, 50))
         self.frame_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -1160,13 +1154,28 @@ class Ui_MainWindow(object):
 
         self.runPredictions.setText("Run prediction")
         self.showChart.setText("Show chart")
-        self.label.setText("Current factors")
-        self.label_2.setText("Predictions")
+        self.label.setText("Current factors for "+now.strftime("%Y-%m-%d"))
+        self.label_2.setText("Predictions for "+now.strftime("%Y-%m-%d"))
 
-        self.runPredictions.connect()
+        self.runPredictions.clicked.connect(self.btn_predictive_analysis)
+        self.showChart.clicked.connect(self.btn_show_chart)
 
         # Run predictions
         self.btn_predictive_analysis()
+
+    def btn_show_chart(self):
+        now = datetime.datetime.now()
+        objects = tuple(self.names)
+        y_pos = np.arange(len(objects))
+        performance = self.sales
+
+        plt.bar(y_pos, performance, align='center', alpha=0.5)
+        plt.xticks(y_pos, objects)
+        plt.ylabel('Sales')
+        plt.xlabel('Items')
+        plt.title('Sales predictions as of '+now.strftime("%Y-%m-%d"))
+
+        plt.show()
 
     def predictions_table(self):
         self.tableWidget_2 = QtWidgets.QTableWidget(self.frame_7)
@@ -1293,12 +1302,16 @@ class Ui_MainWindow(object):
     def btn_predictive_analysis(self):
         forecasts = get_prediction(self.d_apis)
         rows = 1
+        self.names = []
+        self.sales = []
         for row_number, d in enumerate(forecasts):
             self.tableWidget_2.setRowCount(rows)
             self.tableWidget_2.insertRow(rows)
             self.tableWidget_2.setItem(rows, 0, QtWidgets.QTableWidgetItem(str(d['item_id'])))
             self.tableWidget_2.setItem(rows, 1, QtWidgets.QTableWidgetItem(str(d['item_name'])))
             self.tableWidget_2.setItem(rows, 2, QtWidgets.QTableWidgetItem(str(int(d['forecast']))))
+            self.names.append(str(d['item_name']))
+            self.sales.append(int(d['forecast']))
             rows = rows + 1
 
     def btn_operators_click(self):
