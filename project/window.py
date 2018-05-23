@@ -754,7 +754,8 @@ class Ui_MainWindow(object):
         self.pushButton_4.clicked.connect(self.btn_inventory_click)
         self.pushButton_5.clicked.connect(self.btn_analytics_click)
         self.pushButton_6.clicked.connect(self.btn_static_analytics_click)
-        self.pushButton_7.clicked.connect(self.btn_predictive_analysis)
+        # self.pushButton_7.clicked.connect(self.btn_predictive_analysis)
+        self.pushButton_7.clicked.connect(self.view_predictive_analysis)
         self.pushButton_8.clicked.connect(self.btn_operator_performance_click)
         self.pushButton_operators.clicked.connect(self.btn_operators_click)
         self.pushButton_10.clicked.connect(self.btn_logout_click)
@@ -1105,8 +1106,156 @@ class Ui_MainWindow(object):
             self.verticalLayout_3.itemAt(i).widget().setParent(None)
         self.static_analytics_view()
 
-    def btn_predictive_analysis(self):
-        print('predictive analysis')
+    def view_predictive_analysis(self):
+
+        for i in reversed(range(self.verticalLayout_3.count())):
+            self.verticalLayout_3.itemAt(i).widget().setParent(None)
+
+        self.frame_6 = QtWidgets.QFrame(self.frame_2)
+        self.frame_6.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.frame_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_6.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_6.setObjectName("frame_6")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.frame_6)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.runPredictions = QtWidgets.QPushButton(self.frame_6)
+        self.runPredictions.setObjectName("runPredictions")
+        self.horizontalLayout_2.addWidget(self.runPredictions)
+        self.showChart = QtWidgets.QPushButton(self.frame_6)
+        self.showChart.setObjectName("showChart")
+        self.horizontalLayout_2.addWidget(self.showChart)
+        spacerItem = QtWidgets.QSpacerItem(652, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem)
+        self.verticalLayout_3.addWidget(self.frame_6)
+        self.frame = QtWidgets.QFrame(self.frame_2)
+        self.frame.setMaximumSize(QtCore.QSize(16777215, 150))
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.frame)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.label = QtWidgets.QLabel(self.frame)
+        self.label.setObjectName("label")
+        self.verticalLayout.addWidget(self.label)
+
+        self.verticalLayout.addWidget(self.external_conditions_view())
+
+        self.label.raise_()
+        self.tableWidget.raise_()
+        self.verticalLayout_3.addWidget(self.frame)
+        self.frame_7 = QtWidgets.QFrame(self.frame_2)
+        self.frame_7.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_7.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_7.setObjectName("frame_7")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.frame_7)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.label_2 = QtWidgets.QLabel(self.frame_7)
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout_2.addWidget(self.label_2)
+
+
+        self.verticalLayout_2.addWidget(self.predictions_table())
+
+        self.verticalLayout_3.addWidget(self.frame_7)
+
+        self.runPredictions.setText("Run prediction")
+        self.showChart.setText("Show chart")
+        self.label.setText("Current factors")
+        self.label_2.setText("Predictions")
+
+        self.runPredictions.connect()
+
+        # Run predictions
+        self.btn_predictive_analysis()
+
+    def predictions_table(self):
+        self.tableWidget_2 = QtWidgets.QTableWidget(self.frame_7)
+        self.tableWidget_2.setRowCount(5)
+        self.tableWidget_2.setColumnCount(3)
+        # self.tableWidget_2.verticalHeader().setVisible(False)
+        # self.tableWidget_2.horizontalHeader().setVisible(False)
+        self.tableWidget_2.setObjectName("tableWidget_2")
+        self.verticalLayout_2.addWidget(self.tableWidget_2)
+
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setItem(0, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setItem(0, 1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setItem(0, 2, item)
+
+        _translate = QtCore.QCoreApplication.translate
+        # MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        __sortingEnabled = self.tableWidget_2.isSortingEnabled()
+        self.tableWidget_2.setSortingEnabled(False)
+        item = self.tableWidget_2.item(0, 0)
+        item.setText(_translate("MainWindow", "Item"))
+        item = self.tableWidget_2.item(0, 1)
+        item.setText(_translate("MainWindow", "Name"))
+        item = self.tableWidget_2.item(0, 2)
+        item.setText(_translate("MainWindow", "Sales"))
+
+        return self.tableWidget_2
+
+    def external_conditions_view(self):
+        self.tableWidget = QtWidgets.QTableWidget(self.frame)
+        self.tableWidget.setRowCount(2)
+        self.tableWidget.setColumnCount(10)
+        # self.tableWidget.verticalHeader().setVisible(False)
+        # self.tableWidget.horizontalHeader().setVisible(False)
+        self.tableWidget.setObjectName("tableWidget")
+
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(0, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(0, 1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(0, 2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(0, 3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(0, 4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(0, 5, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(0, 6, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(0, 7, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(0, 8, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(0, 9, item)
+
+        _translate = QtCore.QCoreApplication.translate
+        # MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        __sortingEnabled = self.tableWidget.isSortingEnabled()
+        self.tableWidget.setSortingEnabled(False)
+        item = self.tableWidget.item(0, 0)
+        item.setText(_translate("MainWindow", "Weather"))
+        item = self.tableWidget.item(0, 1)
+        item.setText(_translate("MainWindow", "Temperature (K)"))
+        item = self.tableWidget.item(0, 2)
+        item.setText(_translate("MainWindow", "Minimum temperature (K)"))
+        item = self.tableWidget.item(0, 3)
+        item.setText(_translate("MainWindow", "Maximum temeprature (K)"))
+        item = self.tableWidget.item(0, 4)
+        item.setText(_translate("MainWindow", "Pressure"))
+        item = self.tableWidget.item(0, 5)
+        item.setText(_translate("MainWindow", "Humidity"))
+        item = self.tableWidget.item(0, 6)
+        item.setText(_translate("MainWindow", "Wind_speed"))
+        item = self.tableWidget.item(0, 7)
+        item.setText(_translate("MainWindow", "Fuel price"))
+        item = self.tableWidget.item(0, 8)
+        item.setText(_translate("MainWindow", "is weekend"))
+        item = self.tableWidget.item(0, 9)
+        item.setText(_translate("MainWindow", "is holiday"))
+
+        self.load_external_conditions()
+
+        return self.tableWidget
+
+    def load_external_conditions(self):
         connection = http.client.HTTPConnection('localhost:8000')
         connection.request('GET', '/api/external-apis')
         response = connection.getresponse()
@@ -1128,16 +1277,29 @@ class Ui_MainWindow(object):
         fuel = float(json_data['fuel'])
         w = float(w)
 
-        d_apis = [w, temp, temp_min, temp_max, pressure, humidity, wind_speed, fuel]
-        # d_apis = [1, 298, 298, 298, 1014, 69, 4, 3807]
+        self.tableWidget.setItem(1, 0, QtWidgets.QTableWidgetItem(str(weather)))
+        self.tableWidget.setItem(1, 1, QtWidgets.QTableWidgetItem(str(temp)))
+        self.tableWidget.setItem(1, 2, QtWidgets.QTableWidgetItem(str(temp_min)))
+        self.tableWidget.setItem(1, 3, QtWidgets.QTableWidgetItem(str(temp_max)))
+        self.tableWidget.setItem(1, 4, QtWidgets.QTableWidgetItem(str(pressure)))
+        self.tableWidget.setItem(1, 5, QtWidgets.QTableWidgetItem(str(humidity)))
+        self.tableWidget.setItem(1, 6, QtWidgets.QTableWidgetItem(str(wind_speed)))
+        self.tableWidget.setItem(1, 7, QtWidgets.QTableWidgetItem(str(fuel)))
+        self.tableWidget.setItem(1, 8, QtWidgets.QTableWidgetItem('Weather'))
+        self.tableWidget.setItem(1, 9, QtWidgets.QTableWidgetItem('Weather'))
 
-        # [2.0000e+00 2.9215e+02 2.9215e+02 2.9215e+02 1.0210e+03 9.3000e+01
-        #  2.6000e+00 3.8075e+03]
+        self.d_apis = [w, temp, temp_min, temp_max, pressure, humidity, wind_speed, fuel]
 
-        # d_apis = [2.0, 292.15, 292.15, 292.15, 1021, 93, 2.6, 3807.50]
-
-        forecasts = get_prediction(d_apis)
-        print(forecasts)
+    def btn_predictive_analysis(self):
+        forecasts = get_prediction(self.d_apis)
+        rows = 1
+        for row_number, d in enumerate(forecasts):
+            self.tableWidget_2.setRowCount(rows)
+            self.tableWidget_2.insertRow(rows)
+            self.tableWidget_2.setItem(rows, 0, QtWidgets.QTableWidgetItem(str(d['item_id'])))
+            self.tableWidget_2.setItem(rows, 1, QtWidgets.QTableWidgetItem(str(d['item_name'])))
+            self.tableWidget_2.setItem(rows, 2, QtWidgets.QTableWidgetItem(str(int(d['forecast']))))
+            rows = rows + 1
 
     def btn_operators_click(self):
         for i in reversed(range(self.verticalLayout_3.count())):
