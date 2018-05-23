@@ -2,14 +2,17 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import mysql.connector
 import bcrypt
+from config import *
 
 
 class GUIForm(QtWidgets.QDialog):
     def __init__(self, parent=None):
         QtWidgets.QDialog.__init__(self, parent)
         self.mylayout()
-        self.dbuser = 'phpmyadmin'
-        self.dbpassword = '123!@#QWEasd'
+        self.host = HOST
+        self.dbuser = DB_USER
+        self.dbpassword = DB_PASSWORD
+        self.database = DB
 
     def mylayout(self):
         self.setWindowModality(QtCore.Qt.ApplicationModal)
@@ -73,7 +76,7 @@ class GUIForm(QtWidgets.QDialog):
             self.label_3.setText("Wrong credentials!")
 
     def authenticate_user(self, username, password):
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         cursor.execute('select username, password from admins')
         data_list = cursor.fetchall()

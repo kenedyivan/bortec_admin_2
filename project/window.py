@@ -22,6 +22,7 @@ import datetime
 
 from ml import *
 from admin_login import GUIForm
+from config import *
 
 style.use('fivethirtyeight')
 
@@ -29,7 +30,7 @@ style.use('fivethirtyeight')
 class Ui_MainWindow(object):
     # Loads all inventory data from the database
     def load_inventory_data(self):
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         cursor.execute('select inventory_stocks.id,items.codes,items.product_name,'
                        'inventory_stocks.received,inventory_stocks.sales,'
@@ -48,7 +49,7 @@ class Ui_MainWindow(object):
         conn.close()
 
     def load_items_data(self):
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         cursor.execute('select id, codes, product_name, units, unit_cost, unit_price, remarks, created_at, updated_at from items')
         data_list = cursor.fetchall()
@@ -62,7 +63,7 @@ class Ui_MainWindow(object):
         conn.close()
 
     def load_sales_data(self):
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         cursor.execute('select sales.id, items.product_name, CONCAT(operators.first_name,\' \', '
                        'operators.last_name) AS '
@@ -80,7 +81,7 @@ class Ui_MainWindow(object):
         conn.close()
 
     def load_received_data(self):
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         cursor.execute('select received_products.id, items.product_name, CONCAT(operators.first_name,\' \', '
                        'operators.last_name) AS '
@@ -100,7 +101,7 @@ class Ui_MainWindow(object):
         conn.close()
 
     def load_operators_data(self):
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         cursor.execute('select id, first_name, last_name, auth_id, dob, created_at, updated_at from operators')
         data_list = cursor.fetchall()
@@ -383,8 +384,8 @@ class Ui_MainWindow(object):
         items = []
         item_names = []
         codes = []
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost',
-                                       database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host,
+                                       database=self.database)
 
         # Load available item IDs
         cursor = conn.cursor()
@@ -481,7 +482,7 @@ class Ui_MainWindow(object):
         self.sales_exp()
 
     def sales_pie(self):
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         cursor.execute('select items.product_name, inventory_stocks.received, inventory_stocks.sales '
                        'from items left join inventory_stocks on items.id = inventory_stocks.item_id')
@@ -513,7 +514,7 @@ class Ui_MainWindow(object):
         self.canvas_sales_pie.draw()
 
     def expenditure_pie(self):
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         cursor.execute('select items.product_name, inventory_stocks.received, inventory_stocks.stocks '
                        'from items left join inventory_stocks on items.id = inventory_stocks.item_id')
@@ -549,7 +550,7 @@ class Ui_MainWindow(object):
         self.canvas_exp_pie.draw()
 
     def sales_exp(self):
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         cursor.execute('select items.product_name, inventory_stocks.total_expenditure_cost, '
                        'inventory_stocks.total_sales_cost '
@@ -601,7 +602,7 @@ class Ui_MainWindow(object):
 
     def operator_performance_view(self):
         MainWindow.setWindowTitle("Operators sales performance analysis")
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         cursor.execute('SELECT o.first_name, SUM(s.quantity) as total FROM '
                        'operators AS o, sales AS s WHERE o.id = s.operator_id  GROUP BY s.operator_id;')
@@ -992,7 +993,7 @@ class Ui_MainWindow(object):
 
         self.item_edit_name = item_name
 
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         query = 'select id, codes, product_name, units, unit_price, remarks, created_at, updated_at from items where ' \
                 'product_name = \'' + item_name + '\''
@@ -1022,7 +1023,7 @@ class Ui_MainWindow(object):
         self.btn_items_click()
 
     def save_edit_details(self, item_name, units_of_measurement, unit_price, code, remarks):
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         query = 'update items set codes=\'' + code + '\',product_name=\'' + \
                 item_name + '\',units=\'' + units_of_measurement + '\',unit_price=\'' + unit_price + '\'' \
@@ -1082,7 +1083,7 @@ class Ui_MainWindow(object):
         self.delete_from_db(self.del_item_name)
 
     def delete_from_db(self, item_name):
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         query = 'delete from items where product_name=\'' + item_name + '\''
         try:
@@ -1102,7 +1103,7 @@ class Ui_MainWindow(object):
         self.deleteItem.setText(_translate("Dialog", "Delete Item"))
 
     def load_items_list_dialog_data(self):
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         cursor.execute('select id, product_name from items')
         data_list = cursor.fetchall()
@@ -1545,7 +1546,7 @@ class Ui_MainWindow(object):
         self.label_5.setText(_translate("Dialog", "New password:"))
 
         self.operator_edit_auth_id = auth_id
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         cursor.execute(
             'select id, first_name, last_name, auth_id, dob, created_at, updated_at from operators where auth_id=\'' + self.operator_edit_auth_id + '\'')
@@ -1558,7 +1559,7 @@ class Ui_MainWindow(object):
         conn.close()
 
     def save_operator_edit_details(self, first_name, last_name, date_of_birth, password=''):
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         query = ''
         if password != '':
@@ -1610,7 +1611,7 @@ class Ui_MainWindow(object):
         self.deleteItem.setText(_translate("Dialog", "Delete Item"))
 
     def load_operators_list_dialog_data(self):
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         cursor.execute('select id, auth_id from operators')
         data_list = cursor.fetchall()
@@ -1624,7 +1625,7 @@ class Ui_MainWindow(object):
         self.delete_operator_from_db(self.del_auth_id)
 
     def delete_operator_from_db(self, auth_id):
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         query = 'delete from operators where auth_id=\'' + auth_id + '\''
         print(query)
@@ -1787,7 +1788,7 @@ class Ui_MainWindow(object):
         self.label_5.setText(_translate("Dialog", "Password:"))
 
     def save_operator_details(self, first_name, last_name, auth_id, date_of_birth, password):
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         try:
             cursor.execute('insert into operators(first_name,last_name,auth_id,dob,password) '
@@ -1907,7 +1908,7 @@ class Ui_MainWindow(object):
         self.btn_items_click()
 
     def save_item_details(self, item_name, units_of_measurement, unit_cost, unit_price, code, remarks):
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
         query = 'insert into items(codes,product_name,units,unit_cost, unit_price,remarks) ' \
                 'values(\'' + code + '\',\'' + item_name + '\',\'' + units_of_measurement + '\',\'' + unit_cost + '\',\'' + unit_price + '\'' \
@@ -1938,8 +1939,10 @@ class Ui_MainWindow(object):
     def __init__(self):
         # Dialog of modal type, not dismissible by click to other windows
         self.show_login_dialog()
-        self.dbuser ='phpmyadmin'
-        self.dbpassword = '123!@#QWEasd'
+        self.host = HOST
+        self.dbuser = DB_USER
+        self.dbpassword = DB_PASSWORD
+        self.database = DB
 
 
 if __name__ == "__main__":
