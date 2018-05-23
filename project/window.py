@@ -380,22 +380,54 @@ class Ui_MainWindow(object):
         self.canvas.draw()
 
     def animate(self, i):
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost', database='bortec_inv_system_db')
-        cursor = conn.cursor()
-        cursor.execute('select id, quantity from sales')
-        data_list = cursor.fetchall()
-        db_xs = []
-        db_ys = []
-        for row_number, d in enumerate(data_list):
-            db_xs.append(d[0])
-            db_ys.append(int(d[1]))
+        items = []
+        item_names = []
+        codes = []
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host='localhost',
+                                       database='bortec_inv_system_db')
 
+        # Load available item IDs
+        cursor = conn.cursor()
+        cursor.execute('select id, product_name from items')
+        names = cursor.fetchall()
+
+        for idx, n in enumerate(names):
+            items.append(n[0])
+            item_names.append(n[1])
+
+
+        for i in items:
+            cursor = conn.cursor()
+            cursor.execute('select id, quantity from sales where item_id = '+str(i))
+            data_list = cursor.fetchall()
+            db_xs = []
+            db_ys = []
+            for row_number, d in enumerate(data_list):
+                db_xs.append(d[0])
+                db_ys.append(int(d[1]))
+            icodes = {'x': db_xs, 'y': db_ys}
+            codes.append(icodes)
         conn.close()
 
-        xs = db_xs
-        ys = db_ys
+
         self.ax1.clear()
-        self.ax1.plot(xs, ys)
+        num_plots = len(codes)
+        colormap = plt.cm.gist_ncar
+        plt.gca().set_color_cycle([colormap(i) for i in np.linspace(0, 0.9, num_plots)])
+        labels = []
+        for row, j in enumerate(codes):
+            # self.ax1.plot(xs, ys)
+            self.ax1.plot(j['x'], j['y'])
+            labels.append(item_names[row])
+
+        plt.legend(labels, loc='upper left')
+        # plt.legend(labels, loc='upper left')
+        # plt.legend(labels, ncol=4, loc='upper center',
+        #            bbox_to_anchor=[0.5, 1.1],
+        #            columnspacing=1.0, labelspacing=0.0,
+        #            handletextpad=0.0, handlelength=1.5,
+        #            fancybox=True, shadow=True)
+
         self.ax1.set_title("Real-time Sales Analysis")
         self.ax1.set_xlabel("Sales")
         self.ax1.set_ylabel("Quantity")
@@ -1164,12 +1196,14 @@ class Ui_MainWindow(object):
         self.btn_predictive_analysis()
 
     def btn_show_chart(self):
+        plt.clf()
         now = datetime.datetime.now()
         objects = tuple(self.names)
         y_pos = np.arange(len(objects))
         performance = self.sales
 
         plt.bar(y_pos, performance, align='center', alpha=0.5)
+        plt.legend('Sales', loc='upper left')
         plt.xticks(y_pos, objects)
         plt.ylabel('Sales')
         plt.xlabel('Items')

@@ -4,7 +4,10 @@
     <list default="true" id="98c0f6fb-311f-4a97-a4d0-a7f0b6bc57dc" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/ml_models/12.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/project/ml_models/12.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/ml_models/9.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/project/ml_models/9.pickle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/ml_test_data/12_y_test.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/project/ml_test_data/12_y_test.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/ml_test_data/9_x_test.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/project/ml_test_data/9_x_test.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/ml_test_data/9_y_test.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/project/ml_test_data/9_y_test.pickle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/window.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/window.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,7 +20,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/bortec_system_admin_desk_master$prediction_view.coverage" NAME="prediction_view Coverage Results" MODIFIED="1527070134656" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/project/uis" />
     <SUITE FILE_PATH="coverage/bortec_system_admin_desk_master$regression_ex.coverage" NAME="regression_ex Coverage Results" MODIFIED="1526898981296" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/bortec_system_admin_desk_master$window.coverage" NAME="window Coverage Results" MODIFIED="1527087760846" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/project" />
+    <SUITE FILE_PATH="coverage/bortec_system_admin_desk_master$window.coverage" NAME="window Coverage Results" MODIFIED="1527095249014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/project" />
     <SUITE FILE_PATH="coverage/bortec_system_admin_desk_master$ml.coverage" NAME="ml Coverage Results" MODIFIED="1526990177650" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/project" />
   </component>
   <component name="DatabaseView">
@@ -60,20 +63,11 @@
       <content type="file-editors">
         <state>
           <leaf>
-            <file leaf-file-name="prediction_view.py" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/project/uis/prediction_view.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="194">
-                    <caret line="60" column="24" selection-start-line="60" selection-start-column="13" selection-end-line="60" selection-end-column="24" />
-                  </state>
-                </provider>
-              </entry>
-            </file>
             <file leaf-file-name="ml.py" pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/project/ml.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="161">
-                    <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+                  <state relative-caret-position="-884">
+                    <caret line="15" selection-start-line="15" selection-end-line="19" selection-end-column="23" />
                   </state>
                 </provider>
               </entry>
@@ -81,8 +75,8 @@
             <file leaf-file-name="window.py" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/project/window.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="449">
-                    <caret line="385" column="37" selection-start-line="385" selection-start-column="37" selection-end-line="385" selection-end-column="37" />
+                  <state relative-caret-position="-119">
+                    <caret line="378" column="65" selection-start-line="378" selection-start-column="58" selection-end-line="378" selection-end-column="65" />
                     <folding>
                       <element signature="e#191#209#0" expanded="true" />
                     </folding>
@@ -100,10 +94,22 @@
       <file leaf-file-name="window.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/project/window.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="397" column="28" lean-forward="true" selection-start-line="397" selection-start-column="28" selection-end-line="397" selection-end-column="28" />
+            <state relative-caret-position="63">
+              <caret line="1198" column="17" selection-start-line="1198" selection-start-column="17" selection-end-line="1198" selection-end-column="17" />
               <folding>
                 <element signature="e#191#209#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin_login.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/admin_login.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1044">
+              <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="12" />
+              <folding>
+                <element signature="e#0#42#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -120,9 +126,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>pushButton_5</find>
-      <find>FuncFormatter</find>
-      <find>closeEvent</find>
       <find>print(</find>
       <find>operator_</find>
       <find>btn_items</find>
@@ -145,11 +148,14 @@
       <find>frame_2</find>
       <find>btn_predictive_analysis</find>
       <find>btn_opera</find>
-      <find>view_</find>
       <find>view_predictive_analysis</find>
       <find>view_pred</find>
       <find>view_predicti</find>
       <find>Predictions</find>
+      <find>view_</find>
+      <find>animate</find>
+      <find>Exception</find>
+      <find>'Sales'</find>
     </findStrings>
     <replaceStrings>
       <replace>user=self.dbuser</replace>
@@ -701,16 +707,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/admin_login.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-845">
-          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="12" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/sklearn/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
@@ -749,17 +745,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/project/admin_login.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1044">
+          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="12" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/project/ml.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+        <state relative-caret-position="-884">
+          <caret line="15" selection-start-line="15" selection-end-line="19" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project/window.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="397" column="28" lean-forward="true" selection-start-line="397" selection-start-column="28" selection-end-line="397" selection-end-column="28" />
+        <state relative-caret-position="63">
+          <caret line="1198" column="17" selection-start-line="1198" selection-start-column="17" selection-end-line="1198" selection-end-column="17" />
           <folding>
             <element signature="e#191#209#0" expanded="true" />
           </folding>
