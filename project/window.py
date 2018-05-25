@@ -11,6 +11,7 @@ import json
 from PyQt5 import QtCore, QtWidgets
 import mysql.connector
 import bcrypt
+from PyQt5.QtWidgets import QMessageBox, QWidget
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
@@ -786,6 +787,7 @@ class Ui_MainWindow(object):
         # self.pushButton_7.clicked.connect(self.btn_predictive_analysis)
         self.pushButton_7.clicked.connect(self.view_predictive_analysis)
         self.pushButton_8.clicked.connect(self.btn_operator_performance_click)
+        self.pushButton_9.clicked.connect(self.btn_admins)
         self.pushButton_operators.clicked.connect(self.btn_operators_click)
         self.pushButton_10.clicked.connect(self.btn_logout_click)
 
@@ -817,6 +819,10 @@ class Ui_MainWindow(object):
         self.menuSettings.setTitle(_translate("MainWindow", "Settings"))
         self.menuWindow.setTitle(_translate("MainWindow", "Window"))
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
+
+    def btn_admins(self):
+        # QMessageBox.question(QMessageBox)
+        pass
 
     def btn_logout_click(self):
         self.show_login_dialog()
@@ -1302,26 +1308,38 @@ class Ui_MainWindow(object):
         return self.tableWidget
 
     def load_external_conditions(self):
-        connection = http.client.HTTPConnection('localhost:8000')
-        connection.request('GET', '/api/external-apis')
-        response = connection.getresponse()
-        data = response.read().decode()
-        json_data = json.loads(data)
-        print(json_data['weather'])
+        temp = 0
+        pressure = 0
+        humidity = 0
+        temp_min = 0
+        temp_max = 0
+        wind_speed = 0
+        fuel = 0
+        w = 0
 
-        weather = json_data['weather']
-        if weather == 'Clouds':
-            w = 1
-        else:
-            w = 2
-        temp = json_data['temp']
-        pressure = float(json_data['pressure'])
-        humidity = float(json_data['humidity'])
-        temp_min = json_data['temp_min']
-        temp_max = json_data['temp_max']
-        wind_speed = float(json_data['wind_speed'])
-        fuel = float(json_data['fuel'])
-        w = float(w)
+        try:
+            connection = http.client.HTTPConnection('localhost:8000')
+            connection.request('GET', '/api/external-apis')
+            response = connection.getresponse()
+            data = response.read().decode()
+            json_data = json.loads(data)
+            print(json_data['weather'])
+
+            weather = json_data['weather']
+            if weather == 'Clouds':
+                w = 1
+            else:
+                w = 2
+            temp = json_data['temp']
+            pressure = float(json_data['pressure'])
+            humidity = float(json_data['humidity'])
+            temp_min = json_data['temp_min']
+            temp_max = json_data['temp_max']
+            wind_speed = float(json_data['wind_speed'])
+            fuel = float(json_data['fuel'])
+            w = float(w)
+        except Exception:
+            print("Network error!")
 
         self.tableWidget.setItem(1, 0, QtWidgets.QTableWidgetItem(str(weather)))
         self.tableWidget.setItem(1, 1, QtWidgets.QTableWidgetItem(str(temp)))
