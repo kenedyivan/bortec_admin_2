@@ -15,7 +15,7 @@ conn = mysql.connector.connect(user=dbuser, password=dbpassword, host='localhost
 
 # Load available item IDs
 cursor = conn.cursor()
-cursor.execute('select id, product_name from items')
+cursor.execute('select items.id, items.product_name, inventory_stocks.stocks from items left join inventory_stocks on items.id = inventory_stocks.item_id')
 data_list = cursor.fetchall()
 length = len(data_list)
 
@@ -75,7 +75,7 @@ else:
 # x_lately = np.asarray([1, 298, 298, 298, 1014, 69, 4, 3807]).reshape(1, -1)
 
 
-def ml_prediction(item_id, item_name, data):
+def ml_prediction(item_id, item_name, stock, data):
     x_lately = np.asarray(data).reshape(1, -1)
     try:
         datax = np.loadtxt('ml_test_data/' + str(item_id) + '_x_test.pickle')
@@ -91,7 +91,7 @@ def ml_prediction(item_id, item_name, data):
             accuracy = clf.score(X_test, y_test)
             forecast_set = clf.predict(x_lately)
 
-            return {'item_id': item_id, 'item_name': item_name, 'accuracy': accuracy, 'forecast': forecast_set[0]}
+            return {'item_id': item_id, 'item_name': item_name, 'stock': stock, 'accuracy': accuracy, 'forecast': forecast_set[0]}
 
         except FileNotFoundError:
             print('No trained model for item ', item_id)
@@ -104,6 +104,6 @@ def get_prediction(data):
     x_lately = data
     forecasts = []
     for row, d in enumerate(data_list):
-        data = ml_prediction(d[0], d[1], x_lately)
+        data = ml_prediction(d[0], d[1], d[2], x_lately)
         forecasts.append(data)
     return forecasts

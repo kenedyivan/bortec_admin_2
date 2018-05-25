@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98c0f6fb-311f-4a97-a4d0-a7f0b6bc57dc" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/ml_models/12.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/project/ml_models/12.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/ml.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/ml.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/ml_models/9.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/project/ml_models/9.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/ml_test_data/12_y_test.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/project/ml_test_data/12_y_test.pickle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/ml_test_data/9_x_test.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/project/ml_test_data/9_x_test.pickle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/ml_test_data/9_y_test.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/project/ml_test_data/9_y_test.pickle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/window.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/window.py" afterDir="false" />
@@ -21,7 +19,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/bortec_system_admin_desk_master$prediction_view.coverage" NAME="prediction_view Coverage Results" MODIFIED="1527070134656" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/project/uis" />
     <SUITE FILE_PATH="coverage/bortec_system_admin_desk_master$regression_ex.coverage" NAME="regression_ex Coverage Results" MODIFIED="1526898981296" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/bortec_system_admin_desk_master$window.coverage" NAME="window Coverage Results" MODIFIED="1527238561559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/project" />
+    <SUITE FILE_PATH="coverage/bortec_system_admin_desk_master$window.coverage" NAME="window Coverage Results" MODIFIED="1527246573144" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/project" />
     <SUITE FILE_PATH="coverage/bortec_system_admin_desk_master$ml.coverage" NAME="ml Coverage Results" MODIFIED="1526990177650" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/project" />
   </component>
   <component name="DatabaseView">
@@ -61,11 +59,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="ml.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/ml.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="93" column="73" selection-start-line="93" selection-start-column="73" selection-end-line="93" selection-end-column="73" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="window.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/project/window.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="1310" column="16" lean-forward="true" selection-start-line="1310" selection-start-column="16" selection-end-line="1310" selection-end-column="16" />
+            <state relative-caret-position="150">
+              <caret line="1378" column="35" selection-start-line="1378" selection-start-column="35" selection-end-line="1378" selection-end-column="35" />
               <folding>
                 <element signature="e#191#209#0" expanded="true" />
               </folding>
@@ -184,10 +191,10 @@
         <option value="$PROJECT_DIR$/project/flie.py" />
         <option value="$PROJECT_DIR$/project/uis/items.py" />
         <option value="$PROJECT_DIR$/regression_ex.py" />
-        <option value="$PROJECT_DIR$/project/ml.py" />
         <option value="$PROJECT_DIR$/project/config.py" />
         <option value="$PROJECT_DIR$/project/admin_login.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/project/ml.py" />
         <option value="$PROJECT_DIR$/project/window.py" />
       </list>
     </option>
@@ -396,18 +403,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="23" y="44" width="1368" height="763" extended-state="0" />
+    <frame x="23" y="44" width="1600" height="873" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3295238" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50127226" side_tool="true" weight="0.42326334" />
-      <window_info anchor="right" x="0" y="0" width="350" height="673" id="Documentation" order="5" sideWeight="0.50339216" side_tool="true" weight="0.3279846" />
+      <window_info anchor="right" x="0" y="0" width="150" height="673" id="Documentation" order="5" sideWeight="0.50339216" side_tool="true" weight="0.32717678" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49872774" weight="0.45773524" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49872774" visible="true" weight="0.45725915" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32971507" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32971507" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.48963317" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1591252" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.19402985" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.078947365" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" sideWeight="0.49932158" weight="0.32991013" />
       <window_info anchor="right" id="SciView" order="4" sideWeight="0.49660787" weight="0.6040724" />
@@ -636,15 +643,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/project/ml.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="15" selection-start-line="15" selection-end-line="19" selection-end-column="23" />
+        <state relative-caret-position="396">
+          <caret line="93" column="73" selection-start-line="93" selection-start-column="73" selection-end-line="93" selection-end-column="73" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project/window.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="1310" column="16" lean-forward="true" selection-start-line="1310" selection-start-column="16" selection-end-line="1310" selection-end-column="16" />
+        <state relative-caret-position="150">
+          <caret line="1378" column="35" selection-start-line="1378" selection-start-column="35" selection-end-line="1378" selection-end-column="35" />
           <folding>
             <element signature="e#191#209#0" expanded="true" />
           </folding>

@@ -821,8 +821,8 @@ class Ui_MainWindow(object):
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
 
     def btn_admins(self):
-        # QMessageBox.question(QMessageBox)
-        pass
+        QMessageBox.question(QMessageBox)
+
 
     def btn_logout_click(self):
         self.show_login_dialog()
@@ -1223,7 +1223,7 @@ class Ui_MainWindow(object):
     def predictions_table(self):
         self.tableWidget_2 = QtWidgets.QTableWidget(self.frame_7)
         self.tableWidget_2.setRowCount(5)
-        self.tableWidget_2.setColumnCount(3)
+        self.tableWidget_2.setColumnCount(5)
         # self.tableWidget_2.verticalHeader().setVisible(False)
         # self.tableWidget_2.horizontalHeader().setVisible(False)
         self.tableWidget_2.setObjectName("tableWidget_2")
@@ -1235,6 +1235,10 @@ class Ui_MainWindow(object):
         self.tableWidget_2.setItem(0, 1, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget_2.setItem(0, 2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setItem(0, 3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setItem(0, 4, item)
 
         _translate = QtCore.QCoreApplication.translate
         # MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -1246,6 +1250,10 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Name"))
         item = self.tableWidget_2.item(0, 2)
         item.setText(_translate("MainWindow", "Sales"))
+        item = self.tableWidget_2.item(0, 3)
+        item.setText(_translate("MainWindow", "Current stock"))
+        item = self.tableWidget_2.item(0, 4)
+        item.setText(_translate("MainWindow", "Status"))
 
         return self.tableWidget_2
 
@@ -1341,7 +1349,7 @@ class Ui_MainWindow(object):
         except Exception:
             print("Network error!")
 
-        self.tableWidget.setItem(1, 0, QtWidgets.QTableWidgetItem(str(weather)))
+        self.tableWidget.setItem(1, 0, QtWidgets.QTableWidgetItem(str(w)))
         self.tableWidget.setItem(1, 1, QtWidgets.QTableWidgetItem(str(temp)))
         self.tableWidget.setItem(1, 2, QtWidgets.QTableWidgetItem(str(temp_min)))
         self.tableWidget.setItem(1, 3, QtWidgets.QTableWidgetItem(str(temp_max)))
@@ -1365,6 +1373,18 @@ class Ui_MainWindow(object):
             self.tableWidget_2.setItem(rows, 0, QtWidgets.QTableWidgetItem(str(d['item_id'])))
             self.tableWidget_2.setItem(rows, 1, QtWidgets.QTableWidgetItem(str(d['item_name'])))
             self.tableWidget_2.setItem(rows, 2, QtWidgets.QTableWidgetItem(str(int(d['forecast']))))
+            self.tableWidget_2.setItem(rows, 3, QtWidgets.QTableWidgetItem(str(int(d['stock']))))
+
+            if d['forecast'] > d['stock']:
+                status = 'Low stock'
+            elif d['forecast'] < d['stock']:
+                status = 'In stock'
+            elif d['forecast'] == d['stock']:
+                status = 'Restock'
+            else:
+                status = 'Indeterminable'
+
+            self.tableWidget_2.setItem(rows, 4, QtWidgets.QTableWidgetItem(status))
             self.names.append(str(d['item_name']))
             self.sales.append(int(d['forecast']))
             rows = rows + 1
