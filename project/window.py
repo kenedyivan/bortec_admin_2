@@ -11,7 +11,7 @@ import json
 from PyQt5 import QtCore, QtWidgets
 import mysql.connector
 import bcrypt
-from PyQt5.QtWidgets import QMessageBox, QWidget
+from PyQt5.QtWidgets import QMessageBox, QWidget, QMainWindow
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
@@ -24,6 +24,7 @@ import datetime
 from ml import *
 from admin_login import GUIForm
 from config import *
+from helpers import *
 
 style.use('fivethirtyeight')
 
@@ -821,7 +822,7 @@ class Ui_MainWindow(object):
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
 
     def btn_admins(self):
-        QMessageBox.question(QMessageBox)
+        notification()
 
 
     def btn_logout_click(self):
@@ -1347,7 +1348,8 @@ class Ui_MainWindow(object):
             fuel = float(json_data['fuel'])
             w = float(w)
         except Exception:
-            print("Network error!")
+            notification('Unable to reach api servers')
+
 
         self.tableWidget.setItem(1, 0, QtWidgets.QTableWidgetItem(str(w)))
         self.tableWidget.setItem(1, 1, QtWidgets.QTableWidgetItem(str(temp)))
