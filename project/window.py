@@ -1669,7 +1669,7 @@ class Ui_MainWindow(object):
         self.addItemDialogUi(self.dialog)
         self.dialog.show()
 
-    def btn_operator_performance_click(self):
+    def btn_operator_performance_click(self): #todo Modified 3
         for i in reversed(range(self.verticalLayout_3.count())):
             self.verticalLayout_3.itemAt(i).widget().setParent(None)
 
@@ -1679,7 +1679,7 @@ class Ui_MainWindow(object):
     '''
         Ends button events handlers
     '''
-    def newSalesView(self):
+    def newSalesView(self): #todo Modified 3
         MainWindow.setWindowTitle("Sales analysis")
         self.frame_6 = QtWidgets.QFrame(self.frame_2)
         self.frame_6.setMaximumSize(QtCore.QSize(16777215, 50))
@@ -1751,7 +1751,7 @@ class Ui_MainWindow(object):
         #print (str(self.comboBox.currentText()))
         pass
 
-    def filter_result(self):
+    def filter_result(self): #todo modied 2
         combo_item = ''
         comboItemName = str(self.comboBox.currentText())
         if comboItemName != 'All':
@@ -1786,7 +1786,7 @@ class Ui_MainWindow(object):
 
         self.operator_performance_view(query)
 
-    def operator_performance_view(self, query):
+    def operator_performance_view(self, query): #todo Modified
         for i in reversed(range(self.verticalLayout.count())):
             self.verticalLayout.itemAt(i).widget().setParent(None)
 
@@ -1838,7 +1838,7 @@ class Ui_MainWindow(object):
         self.pushButton_5.setText(_translate("MainWindow", "Real-time Analytics"))
         self.pushButton_6.setText(_translate("MainWindow", "Static Analytics"))
         self.pushButton_7.setText(_translate("MainWindow", "Predictive Analysis"))
-        self.pushButton_8.setText(_translate("MainWindow", "Sales Analytics"))
+        self.pushButton_8.setText(_translate("MainWindow", "Sales Analytics")) #todo modified 234
         self.pushButton_9.setText(_translate("MainWindow", "Admins"))
         self.pushButton_10.setText(_translate("MainWindow", "Logout"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
