@@ -692,6 +692,9 @@ class Ui_MainWindow(object):
         self.pushButton_8 = QtWidgets.QPushButton(self.frame_6)
         self.pushButton_8.setObjectName("pushButton_8")
         self.verticalLayout_5.addWidget(self.pushButton_8)
+        self.operator_analysis_btn = QtWidgets.QPushButton(self.frame_6)
+        self.operator_analysis_btn.setObjectName("operator_analysis_btn") #todo Operator analytics button object
+        self.verticalLayout_5.addWidget(self.operator_analysis_btn)
         self.pushButton_9 = QtWidgets.QPushButton(self.frame_6)
         self.pushButton_9.setObjectName("pushButton_9")
         self.verticalLayout_5.addWidget(self.pushButton_9)
@@ -757,6 +760,7 @@ class Ui_MainWindow(object):
         # self.pushButton_7.clicked.connect(self.btn_predictive_analysis)
         self.pushButton_7.clicked.connect(self.view_predictive_analysis)
         self.pushButton_8.clicked.connect(self.btn_operator_performance_click)
+        self.operator_analysis_btn.clicked.connect(self.btn_operator_analytics_click) #todo Operator analytics button signal
         self.pushButton_9.clicked.connect(self.btn_admins)
         self.pushButton_operators.clicked.connect(self.btn_operators_click)
         self.pushButton_10.clicked.connect(self.btn_logout_click)
@@ -780,7 +784,7 @@ class Ui_MainWindow(object):
         self.pushButton_5.setText(_translate("MainWindow", "Real-time Analytics"))
         self.pushButton_6.setText(_translate("MainWindow", "Static Analytics"))
         self.pushButton_7.setText(_translate("MainWindow", "Predictive Analysis"))
-        self.pushButton_8.setText(_translate("MainWindow", "Operators Analytics"))
+        self.pushButton_8.setText(_translate("MainWindow", "Operators Analytics")) #todo Operator analytics code button
         self.pushButton_9.setText(_translate("MainWindow", "Admins"))
         self.pushButton_10.setText(_translate("MainWindow", "Logout"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
@@ -789,6 +793,180 @@ class Ui_MainWindow(object):
         self.menuSettings.setTitle(_translate("MainWindow", "Settings"))
         self.menuWindow.setTitle(_translate("MainWindow", "Window"))
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
+
+    #todo Operator analytis code
+    def btn_operator_analytics_click(self):
+        for i in reversed(range(self.verticalLayout_3.count())):
+            self.verticalLayout_3.itemAt(i).widget().setParent(None)
+        self.operator_analytics_view()
+
+    def operator_analytics_view(self): #todo Operator analytics 1
+        MainWindow.setWindowTitle("Sales analysis")
+        self.frame_6 = QtWidgets.QFrame(self.frame_2)
+        self.frame_6.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.frame_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_6.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_6.setObjectName("frame_6")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.frame_6)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.comboBox = QtWidgets.QComboBox(self.frame_6)
+        self.comboBox.setObjectName("comboBox")
+        self.horizontalLayout_2.addWidget(self.comboBox)
+        self.item_combo = QtWidgets.QComboBox(self.frame_6)
+        self.item_combo.setObjectName("item_combo")
+        self.horizontalLayout_2.addWidget(self.item_combo)
+        self.dateRange = QtWidgets.QLabel(self.frame_6)
+        self.dateRange.setObjectName("dateRange")
+        self.horizontalLayout_2.addWidget(self.dateRange)
+        self.dateFrom = QtWidgets.QLineEdit(self.frame_6)
+        self.dateFrom.setObjectName("dateFrom")
+        self.horizontalLayout_2.addWidget(self.dateFrom)
+        self.label_3 = QtWidgets.QLabel(self.frame_6)
+        self.label_3.setObjectName("label_3")
+        self.horizontalLayout_2.addWidget(self.label_3)
+        self.dateTo = QtWidgets.QLineEdit(self.frame_6)
+        self.dateTo.setObjectName("dateTo")
+        self.horizontalLayout_2.addWidget(self.dateTo)
+        self.runFilter = QtWidgets.QPushButton(self.frame_6)
+        self.runFilter.setObjectName("runFilter")
+        self.horizontalLayout_2.addWidget(self.runFilter)
+        spacerItem = QtWidgets.QSpacerItem(500, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem)
+        self.verticalLayout_3.addWidget(self.frame_6)
+        self.frame_7 = QtWidgets.QFrame(self.frame_2)
+        self.frame_7.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_7.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_7.setObjectName("frame_7")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.frame_7)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.verticalLayout_2.addLayout(self.verticalLayout)
+        self.verticalLayout_3.addWidget(self.frame_7)
+        self.horizontalLayout.addWidget(self.frame_2)
+
+        self.dateFrom.setPlaceholderText("e.g. 2018-5-1")
+        self.dateTo.setPlaceholderText("e.g 2018-12-1")
+        self.dateRange.setText("Date Range:")
+        self.label_3.setText("To")
+        self.runFilter.setText("Filter")
+
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host,
+                                       database=self.database)
+        cursor = conn.cursor()
+        cursor.execute('select id, first_name, last_name from operators')
+        data_list = cursor.fetchall()
+
+        cursor.execute('select id, first_name, last_name from operators')
+        data_list = cursor.fetchall()
+        print(data_list)
+
+        self.combo_items = {}
+        self.comboBox.addItem("All operators")
+        for row_number, d in enumerate(data_list):
+            self.combo_items[str(d[1])] = str(d[0])
+            self.comboBox.addItem(str(d[1]))
+
+        cursor.execute('select id, product_name from items')
+        data_list_items = cursor.fetchall()
+        print(data_list_items)
+
+        self.item_combo_items = {}
+        self.item_combo.addItem("All items")
+        for row_number, d in enumerate(data_list_items):
+            self.item_combo_items[str(d[1])] = str(d[0])
+            self.item_combo.addItem(str(d[1]))
+
+        self.comboBox.activated.connect(self.item_selected)
+
+        self.runFilter.clicked.connect(self.filter_operator_result)
+
+        query = 'SELECT SUM(quantity) as total, DATE (created_at) FROM sales GROUP BY DATE (created_at);'
+        self.operator_an_view(query)
+
+    def filter_operator_result(self): #todo Operator analytics 2
+        combo_item = ''
+        comboItemName = str(self.comboBox.currentText())
+        if comboItemName != 'All operators':
+            combo_item = self.combo_items[comboItemName]
+
+        item_combo_item = ''
+        itemComboItemName = str(self.item_combo.currentText())
+        if itemComboItemName != 'All items':
+            item_combo_item = self.item_combo_items[itemComboItemName]
+
+        date_from = str(self.dateFrom.text()).strip()
+        date_to = str(self.dateTo.text()).strip()
+
+        if combo_item or item_combo_item or date_from or date_to:
+            dic = {}
+
+            if combo_item:
+                dic["operator"] = 'operator_id = \'' + combo_item.strip() + '\''
+
+            if item_combo_item:
+                dic["item"] = 'item_id = \'' + item_combo_item.strip() + '\''
+
+
+            if date_from:
+                dic["date_from"] = 'DATE(created_at) >=\'' + date_from.strip() + '\''
+
+            if date_to:
+                dic["date_to"] = 'DATE(created_at) <=\'' + date_to.strip() + '\''
+
+
+            like_list = []
+            for key in dic:
+                like_list.append(dic[key])
+
+            like_query = ' AND '.join(like_list)
+
+            print("Query ", like_query)
+            query = 'SELECT SUM(quantity) as total, DATE (created_at) FROM sales WHERE '+like_query+' GROUP BY DATE (created_at);'
+
+        else:
+            query = 'SELECT SUM(quantity) as total, DATE (created_at) FROM sales GROUP BY DATE (created_at);'
+
+        self.operator_an_view(query)
+
+    def operator_an_view(self, query): #todo Operator analytics 3
+        for i in reversed(range(self.verticalLayout.count())):
+            self.verticalLayout.itemAt(i).widget().setParent(None)
+
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
+        cursor = conn.cursor()
+
+
+        cursor.execute(query)
+
+        data_list = cursor.fetchall()
+        print(len(data_list))
+
+        if len(data_list) > 0:
+            date = []
+            total_sales = []
+            for row_number, d in enumerate(data_list):
+                total_sales.append(int(d[0]))
+                date.append(str(d[1]))
+            conn.close()
+
+            x = np.arange(len(data_list))
+            money = total_sales
+            plt.clf()
+            self.fig4, ax4 = plt.subplots()
+            plt.bar(x, money)
+            plt.legend('Sales', loc='upper right')
+            plt.xticks(x, tuple(date))
+            plt.tick_params(axis='both', which='major', labelsize=6)
+            plt.tick_params(axis='both', which='minor', labelsize=6)
+            plt.xlabel('Date', fontsize=8)
+            plt.ylabel('Total sales', fontsize=8)
+            plt.title('Sales analysis', fontsize=12)
+            self.canvas_operators = FigureCanvas(self.fig4)
+            self.verticalLayout.addWidget(self.canvas_operators)
+            self.canvas_operators.draw()
+        else:
+            notification('No data available')
 
     def btn_admins(self):
         notification()
@@ -1747,6 +1925,44 @@ class Ui_MainWindow(object):
         query = 'SELECT SUM(quantity) as total, DATE (created_at) FROM sales GROUP BY DATE (created_at);'
         self.operator_performance_view(query)
 
+    def operator_performance_view(self, query): #todo Modified
+        for i in reversed(range(self.verticalLayout.count())):
+            self.verticalLayout.itemAt(i).widget().setParent(None)
+
+        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
+        cursor = conn.cursor()
+
+        # cursor.execute('SELECT o.first_name, SUM(s.quantity) as total, DATE (s.created_at) FROM '
+        #                'operators AS o, sales AS s WHERE o.id = s.operator_id  GROUP BY s.operator_id, DATE (s.created_at);')
+
+        cursor.execute(query)
+
+        data_list = cursor.fetchall()
+        print(data_list)
+
+        date = []
+        total_sales = []
+        for row_number, d in enumerate(data_list):
+            total_sales.append(int(d[0]))
+            date.append(str(d[1]))
+        conn.close()
+
+        x = np.arange(len(data_list))
+        money = total_sales
+        plt.clf()
+        self.fig4, ax4 = plt.subplots()
+        plt.bar(x, money)
+        plt.legend('Sales', loc='upper right')
+        plt.xticks(x, tuple(date))
+        plt.tick_params(axis='both', which='major', labelsize=6)
+        plt.tick_params(axis='both', which='minor', labelsize=6)
+        plt.xlabel('Date', fontsize=8)
+        plt.ylabel('Total sales', fontsize=8)
+        plt.title('Sales analysis', fontsize=12)
+        self.canvas_operators = FigureCanvas(self.fig4)
+        self.verticalLayout.addWidget(self.canvas_operators)
+        self.canvas_operators.draw()
+
     def item_selected(self):
         #print (str(self.comboBox.currentText()))
         pass
@@ -1839,6 +2055,7 @@ class Ui_MainWindow(object):
         self.pushButton_6.setText(_translate("MainWindow", "Static Analytics"))
         self.pushButton_7.setText(_translate("MainWindow", "Predictive Analysis"))
         self.pushButton_8.setText(_translate("MainWindow", "Sales Analytics")) #todo modified 234
+        self.operator_analysis_btn.setText(_translate("MainWindow", "Operator analysis")) #todo modified 234
         self.pushButton_9.setText(_translate("MainWindow", "Admins"))
         self.pushButton_10.setText(_translate("MainWindow", "Logout"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
