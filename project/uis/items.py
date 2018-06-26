@@ -75,7 +75,6 @@ class Ui_MainWindow(object):
         self.frame_5.setObjectName("frame_5")
         self.verticalLayout_4.addWidget(self.frame_5)
         self.horizontalLayout.addWidget(self.frame)
-
         self.frame_2 = QtWidgets.QFrame(self.centralwidget)
         self.frame_2.setStyleSheet("background-color:rgb(207, 255, 180)")
         self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -83,7 +82,6 @@ class Ui_MainWindow(object):
         self.frame_2.setObjectName("frame_2")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.frame_2)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-
         self.frame_6 = QtWidgets.QFrame(self.frame_2)
         self.frame_6.setMaximumSize(QtCore.QSize(16777215, 50))
         self.frame_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -97,7 +95,6 @@ class Ui_MainWindow(object):
         spacerItem = QtWidgets.QSpacerItem(506, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
         self.verticalLayout_3.addWidget(self.frame_6)
-
         self.frame_7 = QtWidgets.QFrame(self.frame_2)
         self.frame_7.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_7.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -114,7 +111,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_6.addLayout(self.verticalLayout_5)
         self.verticalLayout_3.addWidget(self.frame_7)
         self.horizontalLayout.addWidget(self.frame_2)
-
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 808, 20))
@@ -135,6 +131,12 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        self.actionAbout = QtWidgets.QAction(MainWindow)
+        self.actionAbout.setObjectName("actionAbout")
+        self.actionExit = QtWidgets.QAction(MainWindow)
+        self.actionExit.setObjectName("actionExit")
+        self.menuFile.addAction(self.actionExit)
+        self.menuHelp.addAction(self.actionAbout)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuEdit.menuAction())
         self.menubar.addAction(self.menuView.menuAction())
@@ -161,6 +163,8 @@ class Ui_MainWindow(object):
         self.menuSettings.setTitle(_translate("MainWindow", "Settings"))
         self.menuWindow.setTitle(_translate("MainWindow", "Window"))
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
+        self.actionAbout.setText(_translate("MainWindow", "About"))
+        self.actionExit.setText(_translate("MainWindow", "Exit"))
 
 
 if __name__ == "__main__":

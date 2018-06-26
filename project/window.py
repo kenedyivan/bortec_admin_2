@@ -11,7 +11,7 @@ import json
 from PyQt5 import QtCore, QtWidgets
 import mysql.connector
 import bcrypt
-from PyQt5.QtWidgets import QMessageBox, QWidget, QMainWindow
+from PyQt5.QtWidgets import QMessageBox, QWidget, QMainWindow, QAction
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
@@ -27,6 +27,7 @@ from config import *
 from helpers import *
 
 style.use('fivethirtyeight')
+plt.rcParams['font.size'] = 9.0 #todo fixed globa chart font size
 
 
 class Ui_MainWindow(object):
@@ -604,7 +605,8 @@ class Ui_MainWindow(object):
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
+        # MainWindow.resize(800, 600)
+        MainWindow.setWindowState(QtCore.Qt.WindowMaximized) #todo Set window size to always maximixed
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setStyleSheet("QFrame.SidebarFrame {\n"
                                          "border-top-left-radius: 10px;\n"
@@ -729,28 +731,25 @@ class Ui_MainWindow(object):
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
-        self.menuEdit = QtWidgets.QMenu(self.menubar)
-        self.menuEdit.setObjectName("menuEdit")
-        self.menuView = QtWidgets.QMenu(self.menubar)
-        self.menuView.setObjectName("menuView")
-        self.menuSettings = QtWidgets.QMenu(self.menubar)
-        self.menuSettings.setObjectName("menuSettings")
-        self.menuWindow = QtWidgets.QMenu(self.menubar)
-        self.menuWindow.setObjectName("menuWindow")
         self.menuHelp = QtWidgets.QMenu(self.menubar)
         self.menuHelp.setObjectName("menuHelp")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        self.actionAbout = QtWidgets.QAction(MainWindow)
+        self.actionAbout.setObjectName("actionAbout")
+        self.actionExit = QtWidgets.QAction(MainWindow)
+        self.actionExit.setObjectName("actionExit")
+        self.menuHelp.addAction(self.actionAbout)
+        self.menuFile.addAction(self.actionExit)
         self.menubar.addAction(self.menuFile.menuAction())
-        self.menubar.addAction(self.menuEdit.menuAction())
-        self.menubar.addAction(self.menuView.menuAction())
-        self.menubar.addAction(self.menuSettings.menuAction())
-        self.menubar.addAction(self.menuWindow.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
 
-        # Assigns button click callbacks
+        self.actionAbout.setText("About")
+        self.actionExit.setText("Exit")
+
+        # Assigns side menu button click callbacks
         self.pushButton.clicked.connect(self.btn_items_click)
         self.pushButton_2.clicked.connect(self.btn_sales_click)
         self.pushButton_3.clicked.connect(self.btn_received_click)
@@ -761,38 +760,66 @@ class Ui_MainWindow(object):
         self.pushButton_7.clicked.connect(self.view_predictive_analysis)
         self.pushButton_8.clicked.connect(self.btn_operator_performance_click)
         self.operator_analysis_btn.clicked.connect(self.btn_operator_analytics_click) #todo Operator analytics button signal
-        self.pushButton_9.clicked.connect(self.btn_admins)
+        # self.pushButton_9.clicked.connect(self.btn_admins)
         self.pushButton_operators.clicked.connect(self.btn_operators_click)
         self.pushButton_10.clicked.connect(self.btn_logout_click)
+
+        # Menu bar action events
+        self.actionAbout.triggered.connect(self.menu_about_click) #todo Added menu bar action triggers
+        self.actionExit.triggered.connect(self.menu_exit_click)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    '''
-    Side menu button events handlers
-    '''
+    #todo Menu bar action trigger methods
+    def menu_exit_click(self):
+        exit(0)
 
-    def retranslateUi(self, MainWindow):
+    def menu_about_click(self):
+        self.dialog = QtWidgets.QDialog()
+        self.dialog.setWindowModality(QtCore.Qt.ApplicationModal)
+        self.aboutSystemDialogUi(self.dialog)
+        self.dialog.show()
+
+    def aboutSystemDialogUi(self, Dialog): #todo About system dialog
+        Dialog.setObjectName("Dialog")
+        Dialog.resize(400, 300)
+        self.label = QtWidgets.QLabel(Dialog)
+        self.label.setGeometry(QtCore.QRect(140, 70, 111, 31))
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(Dialog)
+        self.label_2.setGeometry(QtCore.QRect(30, 100, 351, 51))
+        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_2.setObjectName("label_2")
+        self.label_3 = QtWidgets.QLabel(Dialog)
+        self.label_3.setGeometry(QtCore.QRect(170, 180, 71, 20))
+        self.label_3.setObjectName("label_3")
+        self.pushButton = QtWidgets.QPushButton(Dialog)
+        self.pushButton.setGeometry(QtCore.QRect(160, 240, 80, 23))
+        self.pushButton.setObjectName("pushButton")
+        self.label_4 = QtWidgets.QLabel(Dialog)
+        self.label_4.setGeometry(QtCore.QRect(66, 150, 251, 20))
+        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_4.setObjectName("label_4")
+
+        self.aboutRetranslateUi(Dialog)
+
+        self.pushButton.clicked.connect(self.btn_close_about)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
+
+    def aboutRetranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Bortec Inventory Analytics System"))
-        self.label.setText(_translate("MainWindow", "<h2><i><b><font color=red>BORTEC</font></b></i></h2>"))
-        self.pushButton.setText(_translate("MainWindow", "Items"))
-        self.pushButton_2.setText(_translate("MainWindow", "Sales"))
-        self.pushButton_3.setText(_translate("MainWindow", "Received"))
-        self.pushButton_4.setText(_translate("MainWindow", "Inventory"))
-        self.pushButton_operators.setText(_translate("MainWindow", "Operators"))
-        self.pushButton_5.setText(_translate("MainWindow", "Real-time Analytics"))
-        self.pushButton_6.setText(_translate("MainWindow", "Static Analytics"))
-        self.pushButton_7.setText(_translate("MainWindow", "Predictive Analysis"))
-        self.pushButton_8.setText(_translate("MainWindow", "Operators Analytics")) #todo Operator analytics code button
-        self.pushButton_9.setText(_translate("MainWindow", "Admins"))
-        self.pushButton_10.setText(_translate("MainWindow", "Logout"))
-        self.menuFile.setTitle(_translate("MainWindow", "File"))
-        self.menuEdit.setTitle(_translate("MainWindow", "Edit"))
-        self.menuView.setTitle(_translate("MainWindow", "View"))
-        self.menuSettings.setTitle(_translate("MainWindow", "Settings"))
-        self.menuWindow.setTitle(_translate("MainWindow", "Window"))
-        self.menuHelp.setTitle(_translate("MainWindow", "Help"))
+        Dialog.setWindowTitle(_translate("Dialog", "About"))
+        self.label.setText(_translate("Dialog", "<h1>BORTEC</h1>"))
+        self.label_2.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:x-large; font-weight:600;\">Inventory management system</span></p></body></html>"))
+        self.label_3.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:small; font-weight:600;\">Version </span><span style=\" font-size:small; font-weight:600; color:#ff0000;\">1.0</span></p></body></html>"))
+        self.pushButton.setText(_translate("Dialog", "Cancel"))
+        self.label_4.setText(_translate("Dialog", "<h3>With Predictive Sales Analysis</h3>"))
+
+    def btn_close_about(self):
+        self.dialog.close()
+
 
     #todo Operator analytis code
     def btn_operator_analytics_click(self):
@@ -801,7 +828,7 @@ class Ui_MainWindow(object):
         self.operator_analytics_view()
 
     def operator_analytics_view(self): #todo Operator analytics 1
-        MainWindow.setWindowTitle("Sales analysis")
+        MainWindow.setWindowTitle("Operator analysis")
         self.frame_6 = QtWidgets.QFrame(self.frame_2)
         self.frame_6.setMaximumSize(QtCore.QSize(16777215, 50))
         self.frame_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -961,16 +988,12 @@ class Ui_MainWindow(object):
             plt.tick_params(axis='both', which='minor', labelsize=6)
             plt.xlabel('Date', fontsize=8)
             plt.ylabel('Total sales', fontsize=8)
-            plt.title('Sales analysis', fontsize=12)
+            plt.title('Operator Sales Analysis', fontsize=12)
             self.canvas_operators = FigureCanvas(self.fig4)
             self.verticalLayout.addWidget(self.canvas_operators)
             self.canvas_operators.draw()
         else:
             notification('No data available')
-
-    def btn_admins(self):
-        notification()
-
 
     def btn_logout_click(self):
         self.show_login_dialog()
@@ -1850,8 +1873,6 @@ class Ui_MainWindow(object):
     def btn_operator_performance_click(self): #todo Modified 3
         for i in reversed(range(self.verticalLayout_3.count())):
             self.verticalLayout_3.itemAt(i).widget().setParent(None)
-
-        #self.operator_performance_view()
         self.newSalesView()
 
     '''
@@ -1923,45 +1944,45 @@ class Ui_MainWindow(object):
         self.runFilter.clicked.connect(self.filter_result)
 
         query = 'SELECT SUM(quantity) as total, DATE (created_at) FROM sales GROUP BY DATE (created_at);'
-        self.operator_performance_view(query)
+        self.sales_analytics_graph_view(query)
 
-    def operator_performance_view(self, query): #todo Modified
+    def sales_analytics_graph_view(self, query): #todo Modified
         for i in reversed(range(self.verticalLayout.count())):
             self.verticalLayout.itemAt(i).widget().setParent(None)
 
         conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
         cursor = conn.cursor()
 
-        # cursor.execute('SELECT o.first_name, SUM(s.quantity) as total, DATE (s.created_at) FROM '
-        #                'operators AS o, sales AS s WHERE o.id = s.operator_id  GROUP BY s.operator_id, DATE (s.created_at);')
-
         cursor.execute(query)
 
         data_list = cursor.fetchall()
-        print(data_list)
+        print(len(data_list))
 
-        date = []
-        total_sales = []
-        for row_number, d in enumerate(data_list):
-            total_sales.append(int(d[0]))
-            date.append(str(d[1]))
-        conn.close()
+        if len(data_list) > 0:
+            date = []
+            total_sales = []
+            for row_number, d in enumerate(data_list):
+                total_sales.append(int(d[0]))
+                date.append(str(d[1]))
+            conn.close()
 
-        x = np.arange(len(data_list))
-        money = total_sales
-        plt.clf()
-        self.fig4, ax4 = plt.subplots()
-        plt.bar(x, money)
-        plt.legend('Sales', loc='upper right')
-        plt.xticks(x, tuple(date))
-        plt.tick_params(axis='both', which='major', labelsize=6)
-        plt.tick_params(axis='both', which='minor', labelsize=6)
-        plt.xlabel('Date', fontsize=8)
-        plt.ylabel('Total sales', fontsize=8)
-        plt.title('Sales analysis', fontsize=12)
-        self.canvas_operators = FigureCanvas(self.fig4)
-        self.verticalLayout.addWidget(self.canvas_operators)
-        self.canvas_operators.draw()
+            x = np.arange(len(data_list))
+            money = total_sales
+            plt.clf()
+            self.fig4, ax4 = plt.subplots()
+            plt.bar(x, money)
+            plt.legend('Sales', loc='upper right')
+            plt.xticks(x, tuple(date))
+            plt.tick_params(axis='both', which='major', labelsize=6)
+            plt.tick_params(axis='both', which='minor', labelsize=6)
+            plt.xlabel('Date', fontsize=8)
+            plt.ylabel('Total sales', fontsize=8)
+            plt.title('Sales analysis', fontsize=12)
+            self.canvas_operators = FigureCanvas(self.fig4)
+            self.verticalLayout.addWidget(self.canvas_operators)
+            self.canvas_operators.draw()
+        else:
+            notification('No data available') #todo Count check, effect this asap
 
     def item_selected(self):
         #print (str(self.comboBox.currentText()))
@@ -2000,47 +2021,7 @@ class Ui_MainWindow(object):
         else:
             query = 'SELECT SUM(quantity) as total, DATE (created_at) FROM sales GROUP BY DATE (created_at);'
 
-        self.operator_performance_view(query)
-
-    def operator_performance_view(self, query): #todo Modified
-        for i in reversed(range(self.verticalLayout.count())):
-            self.verticalLayout.itemAt(i).widget().setParent(None)
-
-        conn = mysql.connector.connect(user=self.dbuser, password=self.dbpassword, host=self.host, database=self.database)
-        cursor = conn.cursor()
-
-        # cursor.execute('SELECT o.first_name, SUM(s.quantity) as total, DATE (s.created_at) FROM '
-        #                'operators AS o, sales AS s WHERE o.id = s.operator_id  GROUP BY s.operator_id, DATE (s.created_at);')
-
-        cursor.execute(query)
-
-        data_list = cursor.fetchall()
-        print(data_list)
-
-        date = []
-        total_sales = []
-        for row_number, d in enumerate(data_list):
-            total_sales.append(int(d[0]))
-            date.append(str(d[1]))
-        conn.close()
-
-        x = np.arange(len(data_list))
-        money = total_sales
-        plt.clf()
-        self.fig4, ax4 = plt.subplots()
-        plt.bar(x, money)
-        plt.legend('Sales', loc='upper right')
-        plt.xticks(x, tuple(date))
-        plt.tick_params(axis='both', which='major', labelsize=6)
-        plt.tick_params(axis='both', which='minor', labelsize=6)
-        plt.xlabel('Date', fontsize=8)
-        plt.ylabel('Total sales', fontsize=8)
-        plt.title('Sales analysis', fontsize=12)
-        self.canvas_operators = FigureCanvas(self.fig4)
-        self.verticalLayout.addWidget(self.canvas_operators)
-        self.canvas_operators.draw()
-
-
+        self.sales_analytics_graph_view(query)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -2059,10 +2040,6 @@ class Ui_MainWindow(object):
         self.pushButton_9.setText(_translate("MainWindow", "Admins"))
         self.pushButton_10.setText(_translate("MainWindow", "Logout"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
-        self.menuEdit.setTitle(_translate("MainWindow", "Edit"))
-        self.menuView.setTitle(_translate("MainWindow", "View"))
-        self.menuSettings.setTitle(_translate("MainWindow", "Settings"))
-        self.menuWindow.setTitle(_translate("MainWindow", "Window"))
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
 
     # class Ui_Dialog(object):
